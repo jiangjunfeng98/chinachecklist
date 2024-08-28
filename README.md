@@ -1,5 +1,10 @@
 # Astro Starter Kit: Portfolio
 
+参考：
+- https://www.arnoldporter.com/en
+- https://chinacheckup.wegic.app/home
+- https://www.chinacheckup.com/
+
 ```sh
 npm create astro@latest -- --template portfolio
 ```
