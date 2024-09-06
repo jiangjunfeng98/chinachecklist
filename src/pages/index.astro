@@ -1,41 +1,40 @@
 ---
-import { getCollection } from 'astro:content';
-
-// Layout import — provides basic page elements: <head>, <nav>, <footer> etc.
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-// Component Imports
 import CallToAction from '../components/CallToAction.astro';
 import Reason from '../components/Reason.astro';
-
-// Content Fetching: List four most recent work projects
-const projects = (await getCollection('work')).sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()).slice(0, 4);
 
 // 选择原因
 const reasonList: { title: string; describe: string; img?: string }[] = [
   {
     title: 'Objective Reports',
-    describe: 'Receive unbiased and comprehensive reports on Chinese companies to ensure you have all the necessary information.'
+    describe: 'Receive unbiased and comprehensive reports on Chinese companies to ensure you have all the necessary information.',
+    img: '/assets/home/icon/objective-reports.svg'
   },
   {
     title: 'Confidentiality',
-    describe: 'Your inquiries and information are handled with the utmost confidentiality and security.'
+    describe: 'Your inquiries and information are handled with the utmost confidentiality and security.',
+    img: '/assets/home/icon/confidentiality.svg'
   },
   {
     title: 'Legal Verification',
-    describe: 'Verify the legal status and compliance of Chinese companies to avoid potential risks.'
+    describe: 'Verify the legal status and compliance of Chinese companies to avoid potential risks.',
+    img: '/assets/home/icon/legal-verification.svg'
   },
   {
     title: 'Risk Assessment',
-    describe: 'Identify and evaluate potential threats to make well-informed business decisions.'
+    describe: 'Identify and evaluate potential threats to make well-informed business decisions.',
+    img: '/assets/home/icon/risk-assessment.svg'
   },
   {
     title: 'Expert Analysis',
-    describe: 'Benefit from expert analysis and insights tailored to your specific business needs.'
+    describe: 'Benefit from expert analysis and insights tailored to your specific business needs.',
+    img: '/assets/home/icon/expert-analysis.svg'
   },
   {
     title: 'Comprehensive Data',
-    describe: 'Access a wealth of data and resources to support your business operations in China.'
+    describe: 'Access a wealth of data and resources to support your business operations in China.',
+    img: '/assets/home/icon/comprehensive-data.svg'
   }
 ];
 ---
@@ -95,16 +94,16 @@ const reasonList: { title: string; describe: string; img?: string }[] = [
       <h2 class="my-4 text-center text-5xl">ChinaCheckup by the Numbers</h2>
       <div class="mt-5 flex">
         <div class="text-center p-4">
-          <h3 class="text-8xl font-bold">24K</h3>
-          <p class="text-3xl">Pro Bono Hours 2022 – 2023</p>
+          <h3 class="text-8xl font-bold">58</h3>
+          <p class="text-3xl">Supportive Partner</p>
         </div>
         <a class="text-center border-x-2 p-4" href="/services/">
-          <h3 class="text-8xl font-bold">24K</h3>
-          <p class="text-3xl">Pro Bono Hours 2022 – 2023</p>
+          <h3 class="text-8xl font-bold">79</h3>
+          <p class="text-3xl">Task Completed</p>
         </a>
         <div class="text-center p-4">
-          <h3 class="text-8xl font-bold">24K</h3>
-          <p class="text-3xl">Pro Bono Hours 2022 – 2023</p>
+          <h3 class="text-8xl font-bold">19</h3>
+          <p class="text-3xl">Countries and Regions</p>
         </div>
       </div>
     </div>
