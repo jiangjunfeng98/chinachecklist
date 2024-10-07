@@ -7,24 +7,56 @@ import ContactCTA from '../components/ContactCTA.astro';
 import PortfolioPreview from '../components/PortfolioPreview.astro';
 import Hero from '../components/Hero.astro';
 import Grid from '../components/Grid.astro';
+import CallToAction from '../components/CallToAction.astro';
+import IconCheck from '../components/IconCheck.astro';
 
 const projects = (await getCollection('work')).sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
 ---
 
-<BaseLayout title="My Work | Jeanine White" description="Learn about Jeanine White's most recent projects">
-  <div class="stack gap-20">
-    <main class="wrapper stack gap-8">
-      <Hero title="My Work" tagline="See my most recent projects below to get an idea of my past experience." align="start" />
-      <Grid variant="offset">
-        {
-          projects.map((project) => (
-            <li>
-              <PortfolioPreview project={project} />
-            </li>
-          ))
-        }
-      </Grid>
-    </main>
-    <ContactCTA />
+<BaseLayout title="Our Service" description="这里描述服务内容">
+  <div class="h-full bg-violet-300">
+    <div class="wrapper gap-8">
+      <Hero title="Our Service" tagline="这里描述服务内容." align="start" />
+      <div class="mt-2 flex gap-3">
+        <div class="p-5 shadow-md rounded-md border border-[var(-gray-100)] w-1/4">
+          <h3 class="text-center">Promise</h3>
+          <p class="text-base mb-4">简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述</p>
+          <CallToAction href="/services/"> 尽情吩咐吧 </CallToAction>
+          <p class="text-center">$<span class="text-4xl">9.9</span></p>
+          <ul class="border-t border-[var(-gray-100)] mt-6 pt-4">
+            <li class="felx flex-row"><IconCheck class="mr-2" />合作/对话渠道</li>
+          </ul>
+        </div>
+        <div class="p-5 shadow-md rounded-md border border-[var(-gray-100)]">
+          <h3 class="text-center">China Essential Verification</h3>
+          <p class="text-base mb-4">
+            简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述
+          </p>
+          <div class="grid grid-cols-3 gap-2">
+            <div class="px-2">
+              <CallToAction href="/services/"> 基础报告 </CallToAction>
+              <p class="text-center">$<span class="text-4xl">99</span></p>Most Popular
+              <ul class="border-t border-[var(-gray-100)] mt-6 pt-4">
+                <li class="felx flex-row"><IconCheck class="mr-2" />合作/对话渠道</li>
+              </ul>
+            </div>
+            <div class="px-2 border-x border-[var(-gray-100)]">
+              <CallToAction href="/services/"> 风险提示报告 </CallToAction>
+              <p class="text-center">$<span class="text-4xl">199</span></p>
+              <ul class="border-t border-[var(-gray-100)] mt-6 pt-4">
+                <li class="felx flex-row"><IconCheck class="mr-2" />合作/对话渠道</li>
+              </ul>
+            </div>
+            <div class="px-2">
+              <CallToAction href="/services/"> 线下验证报告 </CallToAction>
+              <p class="text-center">$<span class="text-4xl">399</span></p>
+              <ul class="border-t border-[var(-gray-100)] mt-6 pt-4">
+                <li class="felx flex-row"><IconCheck class="mr-2" />合作/对话渠道</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </BaseLayout>

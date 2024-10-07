@@ -20,9 +20,11 @@ const { title, description } = Astro.props;
     <MainHead title={title} description={description} />
   </head>
   <body>
-    <div class="stack backgrounds">
+    <div class="stack backgrounds h-screen w-screen flex flex-col">
       <Nav />
-      <slot />
+      <div class="flex-1">
+        <slot />
+      </div>
       <Footer />
     </div>
 
