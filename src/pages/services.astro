@@ -9,51 +9,68 @@ import Hero from '../components/Hero.astro';
 import Grid from '../components/Grid.astro';
 import CallToAction from '../components/CallToAction.astro';
 import IconCheck from '../components/IconCheck.astro';
+import { baseReport } from '../data/resport';
 
 const projects = (await getCollection('work')).sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
 ---
 
 <BaseLayout title="Our Service" description="这里描述服务内容">
-  <div class="h-full bg-violet-300">
-    <div class="wrapper gap-8">
-      <Hero title="Our Service" tagline="这里描述服务内容." align="start" />
-      <div class="mt-2 flex gap-3">
-        <div class="p-5 shadow-md rounded-md border border-[var(-gray-100)] w-1/4">
-          <h3 class="text-center">Promise</h3>
-          <p class="text-base mb-4">简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述</p>
-          <CallToAction href="/services/"> 尽情吩咐吧 </CallToAction>
-          <p class="text-center">$<span class="text-4xl">9.9</span></p>
-          <ul class="border-t border-[var(-gray-100)] mt-6 pt-4">
-            <li class="felx flex-row"><IconCheck class="mr-2" />合作/对话渠道</li>
-          </ul>
-        </div>
-        <div class="p-5 shadow-md rounded-md border border-[var(-gray-100)]">
-          <h3 class="text-center">China Essential Verification</h3>
-          <p class="text-base mb-4">
-            简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述
-          </p>
-          <div class="grid grid-cols-3 gap-2">
-            <div class="px-2">
-              <CallToAction href="/services/"> 基础报告 </CallToAction>
-              <p class="text-center">$<span class="text-4xl">99</span></p>Most Popular
-              <ul class="border-t border-[var(-gray-100)] mt-6 pt-4">
-                <li class="felx flex-row"><IconCheck class="mr-2" />合作/对话渠道</li>
-              </ul>
-            </div>
-            <div class="px-2 border-x border-[var(-gray-100)]">
-              <CallToAction href="/services/"> 风险提示报告 </CallToAction>
-              <p class="text-center">$<span class="text-4xl">199</span></p>
-              <ul class="border-t border-[var(-gray-100)] mt-6 pt-4">
-                <li class="felx flex-row"><IconCheck class="mr-2" />合作/对话渠道</li>
-              </ul>
-            </div>
-            <div class="px-2">
-              <CallToAction href="/services/"> 线下验证报告 </CallToAction>
-              <p class="text-center">$<span class="text-4xl">399</span></p>
-              <ul class="border-t border-[var(-gray-100)] mt-6 pt-4">
-                <li class="felx flex-row"><IconCheck class="mr-2" />合作/对话渠道</li>
-              </ul>
-            </div>
+  <Hero title="Our Service" tagline="这里描述服务内容." align="start" />
+  <div class="h-full bg-[#F0FAFF]">
+    <div class="pt-[70px] px-[50px] flex gap-3">
+      <div class="p-6 shadow rounded-md border bg-white w-1/4">
+        <h3 class="text-center text-3xl">Promise</h3>
+        <p class="text-center mt-3 text-6xl h-20 leading-[80px]">$9.9</p>
+        <p class="text-base mb-4">简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述</p>
+        <CallToAction href="/services/"> 尽情吩咐吧 </CallToAction>
+
+        <ul class="border-t border-[var(-gray-100)] mt-6 pt-4">
+          <li class="felx flex-row"><IconCheck class="mr-2" />合作/对话渠道</li>
+        </ul>
+      </div>
+      <div class="p-6 shadow rounded-md border bg-[#F7FCFF]">
+        <h3 class="text-center text-3xl">China Essential Verification</h3>
+        <div class="grid grid-cols-3 gap-2">
+          <div class="px-4">
+            <p class="text-center mt-3 text-6xl h-20 leading-[80px]">$99</p>
+            <CallToAction href="/services/"> Basic </CallToAction>
+            <p class="text-base mb-4">基础报告</p>
+            <ul class="border-t border-[var(-gray-100)] mt-6 pt-4">
+              <div>Essential company data.</div>
+              <!-- 循环渲染每个报告项 -->
+              {baseReport.map((report, index) => (
+                  <!-- 展示标题 -->
+                  <div>{report.title}
+                  <!-- 如果存在备注，则展示备注 -->
+                  {report.note && <span class="text-xs text-red-400">{report.note}</span>}
+                  </div>
+                  <!-- 循环渲染列表项 -->
+                  {report.list.map((item, subIndex) => (
+                      <li  class="felx flex-row text-xl text-[#3D3D3D]"><IconCheck class="mr-2" />{item}</li>
+                  ))}
+              ))}
+            </ul>
+            <div class="mt-4">*Please note that not all registration details may be available.</div>
+          </div>
+          <div class="px-4 border-x border-[var(-gray-100)]">
+            <p class="text-center mt-3 text-6xl h-20 leading-[80px]">$199<sapn class="text-xs">Most Popular</sapn></p>
+            <CallToAction href="/services/"> Plus </CallToAction>
+            <p class="text-base mb-4">风险提示报告</p>
+            <ul class="border-t border-[var(-gray-100)] mt-6 pt-4">
+              <div>Basic + Advanced Risk Analysis.:</div>
+              <li class="felx flex-row"><IconCheck class="mr-2" />合作/对话渠道</li>
+            </ul>
+            <div class="mt-4">*Please note that not all registration details may be available.</div>
+          </div>
+          <div class="px-4">
+            <p class="text-center mt-3 text-6xl h-20 leading-[80px]">$399</p>
+            <CallToAction href="/services/"> Ultimate </CallToAction>
+            <p class="text-base mb-4">线下验证报告</p>
+            <ul class="border-t border-[var(-gray-100)] mt-6 pt-4">
+              <div>Plus + Offline Verification.</div>
+              <li class="felx flex-row"><IconCheck class="mr-2" />合作/对话渠道</li>
+            </ul>
+            <div class="mt-4">*Please note that not all registration details may be available.</div>
           </div>
         </div>
       </div>
