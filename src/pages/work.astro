@@ -6,7 +6,7 @@ import Hero from '../components/Hero.astro';
 import Icon from '../components/Icon.astro';
 import Pill from '../components/Pill.astro';
 import PortfolioPreview from '../components/PortfolioPreview.astro';
-import ContactCTA from '../components/ContactCTA.astro';
+// import ContactCTA from '../components/ContactCTA.astro';
 import Skills from '../components/Skills.astro';
 import CallToAction from '../components/CallToAction.astro';
 
@@ -62,5 +62,5 @@ const projects = (await getCollection('work')).sort((a, b) => b.data.publishDate
     </section>
   </main>
 
-  <ContactCTA />
+  <!-- <ContactCTA /> -->
 </BaseLayout>
