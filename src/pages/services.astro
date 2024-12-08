@@ -10,25 +10,50 @@ import Grid from '../components/Grid.astro';
 import CallToAction from '../components/CallToAction.astro';
 import IconCheck from '../components/IconCheck.astro';
 import { baseReport } from '../data/resport';
+import Reason from '../components/Reason.astro';
 
 const projects = (await getCollection('work')).sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+
+// 选择原因
+const reasonList: { title: string; describe: string; img?: string }[] = [
+  {
+    title: 'Objective Reports',
+    describe: 'Receive unbiased and comprehensive reports on Chinese companies to ensure you have all the necessary information.',
+    img: '/assets/home/icon/objective-reports.svg'
+  },
+  {
+    title: 'Confidentiality',
+    describe: 'Your inquiries and information are handled with the utmost confidentiality and security.',
+    img: '/assets/home/icon/confidentiality.svg'
+  },
+  {
+    title: 'Legal Verification',
+    describe: 'Verify the legal status and compliance of Chinese companies to avoid potential risks.',
+    img: '/assets/home/icon/legal-verification.svg'
+  },
+  {
+    title: 'Risk Assessment',
+    describe: 'Identify and evaluate potential threats to make well-informed business decisions.',
+    img: '/assets/home/icon/risk-assessment.svg'
+  },
+  {
+    title: 'Expert Analysis',
+    describe: 'Benefit from expert analysis and insights tailored to your specific business needs.',
+    img: '/assets/home/icon/expert-analysis.svg'
+  },
+  {
+    title: 'Comprehensive Data',
+    describe: 'Access a wealth of data and resources to support your business operations in China.',
+    img: '/assets/home/icon/comprehensive-data.svg'
+  }
+];
 ---
 
 <BaseLayout title="Our Service" description="这里描述服务内容">
   <Hero title="Our Service" tagline="这里描述服务内容." align="start" />
   <div class="h-full bg-[#F0FAFF]">
-    <div class="pt-[70px] px-[50px] flex gap-3">
-      <div class="p-6 shadow rounded-md border bg-white w-1/4">
-        <h3 class="text-center text-3xl">Promise</h3>
-        <p class="text-center mt-3 text-6xl h-20 leading-[80px]">$9.9</p>
-        <p class="text-base mb-4">简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述简述</p>
-        <CallToAction href="/services/"> 尽情吩咐吧 </CallToAction>
-
-        <ul class="border-t border-[var(-gray-100)] mt-6 pt-4">
-          <li class="felx flex-row"><IconCheck class="mr-2" />合作/对话渠道</li>
-        </ul>
-      </div>
-      <div class="p-6 shadow rounded-md border bg-[#F7FCFF]">
+    <div class="pt-[70px] px-[50px] flex justify-center">
+      <div class="p-6 shadow rounded-md border bg-[#F7FCFF] max-w-7xl">
         <h3 class="text-center text-3xl">China Essential Verification</h3>
         <div class="grid grid-cols-3 gap-2">
           <div class="px-4">
@@ -73,6 +98,39 @@ const projects = (await getCollection('work')).sort((a, b) => b.data.publishDate
             <div class="mt-4">*Please note that not all registration details may be available.</div>
           </div>
         </div>
+      </div>
+    </div>
+    <div>
+      <div>
+        <p class="mt-20 text-3xl text-center font-semibold leading-7">Why Choose Us</p>
+        <div class="mt-10 text-lg leading-8 text-slate-700 dark:text-slate-300">
+          We provide all the tools and insights you need to navigate the complexities of doing business with Chinese companies.
+        </div>
+      </div>
+      <dl
+        class="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 text-base leading-7 text-slate-700 dark:text-slate-300 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:gap-x-16"
+      >
+        {reasonList.map((reason) => <Reason reason={reason} />)}
+      </dl>
+    </div>
+    <div class="flex flex-row items-center justify-center gap-12 border-y border-[var(-gray-100)] p-10 text-slate-700 dark:text-slate-300">
+      <div>
+        <img src="/assets/home/report-cover.jpg" alt="Report Cover" class="w-[570px] h-[400px]" />
+      </div>
+      <div class="w-[400px]">
+        <h3 class="text-3xl">Company Verification Reports</h3>
+        <p class="my-4">Ensure the Chinese company you are dealing with is legally registered. <br /> Order online, fast turnaround.</p>
+        <CallToAction href="/services/"> Request a Report </CallToAction>
+      </div>
+    </div>
+    <div class="flex flex-row items-center justify-center gap-12 border-y border-[var(-gray-100)] p-10 text-slate-700 dark:text-slate-300">
+      <div>
+        <img src="/assets/home/promise.jpg" alt="Promise" class="w-[570px] h-[400px]" />
+      </div>
+      <div class="w-[400px]">
+        <h3 class="text-3xl">Global Reach, Local Touch</h3>
+        <p class="my-4">Utilize our local expertise to smoothly fulfill your ideas and requests.</p>
+        <CallToAction href="/services/"> Request a Report </CallToAction>
       </div>
     </div>
   </div>

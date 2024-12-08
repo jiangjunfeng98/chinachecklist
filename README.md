@@ -4,6 +4,7 @@
 - https://www.arnoldporter.com/en
 - https://chinacheckup.wegic.app/home
 - https://www.chinacheckup.com/
+- https://china-support.wegic.app/
 
 ```sh
 npm create astro@latest -- --template portfolio
