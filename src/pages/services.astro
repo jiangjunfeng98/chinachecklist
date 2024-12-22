@@ -1,18 +1,11 @@
 ---
-import { getCollection } from 'astro:content';
-
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-// import ContactCTA from '../components/ContactCTA.astro';
-import PortfolioPreview from '../components/PortfolioPreview.astro';
-import Hero from '../components/Hero.astro';
-import Grid from '../components/Grid.astro';
 import CallToAction from '../components/CallToAction.astro';
 import IconCheck from '../components/IconCheck.astro';
 import { baseReport } from '../data/resport';
 import Reason from '../components/Reason.astro';
 
-const projects = (await getCollection('work')).sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
 
 // 选择原因
 const reasonList: { title: string; describe: string; img?: string }[] = [
@@ -49,88 +42,89 @@ const reasonList: { title: string; describe: string; img?: string }[] = [
 ];
 ---
 
-<BaseLayout title="Our Service" description="这里描述服务内容">
-  <Hero title="Our Service" tagline="这里描述服务内容." align="start" />
+<BaseLayout title="Our Service" description="Objective Reports">
+
   <div class="h-full bg-[#F0FAFF]">
     <div class="pt-[70px] px-[50px] flex justify-center">
       <div class="p-6 shadow rounded-md border bg-[#F7FCFF] max-w-7xl">
-        <h3 class="text-center text-3xl">China Essential Verification</h3>
+        <h2 class="text-center text-4xl mb-1">China Essential Verification</h2>
         <div class="grid grid-cols-3 gap-2">
           <div class="px-4">
             <p class="text-center mt-3 text-6xl h-20 leading-[80px]">$99</p>
             <CallToAction href="/services/"> Basic </CallToAction>
-            <p class="text-base mb-4">基础报告</p>
+            <p class="text-base mb-4">Basic Report</p>
             <ul class="border-t border-[var(-gray-100)] mt-6 pt-4">
               <div>Essential company data.</div>
               <!-- 循环渲染每个报告项 -->
               {baseReport.map((report, index) => (
-                  <!-- 展示标题 -->
                   <div>{report.title}
-                  <!-- 如果存在备注，则展示备注 -->
                   {report.note && <span class="text-xs text-red-400">{report.note}</span>}
                   </div>
                   <!-- 循环渲染列表项 -->
                   {report.list.map((item, subIndex) => (
-                      <li  class="felx flex-row text-xl text-[#3D3D3D]"><IconCheck class="mr-2" />{item}</li>
+                      <li  class="felx flex-row text-base text-[#3D3D3D]"><IconCheck class="mr-2" />{item}</li>
                   ))}
               ))}
             </ul>
-            <div class="mt-4">*Please note that not all registration details may be available.</div>
+            <div class="mt-4 text-sm">*Please note that not all registration details may be available.</div>
           </div>
           <div class="px-4 border-x border-[var(-gray-100)]">
             <p class="text-center mt-3 text-6xl h-20 leading-[80px]">$199<sapn class="text-xs">Most Popular</sapn></p>
             <CallToAction href="/services/"> Plus </CallToAction>
-            <p class="text-base mb-4">风险提示报告</p>
+            <p class="text-base mb-4">Risk Alert Report</p>
             <ul class="border-t border-[var(-gray-100)] mt-6 pt-4">
-              <div>Basic + Advanced Risk Analysis.:</div>
-              <li class="felx flex-row"><IconCheck class="mr-2" />合作/对话渠道</li>
+              <div>Basic + Advanced Risk Analysis.</div>
+              <li class="felx flex-row"><IconCheck class="mr-2" />Basic Report</li>
+              <li class="felx flex-row"><IconCheck class="mr-2" />Advanced Risk Analysis</li>
             </ul>
-            <div class="mt-4">*Please note that not all registration details may be available.</div>
           </div>
           <div class="px-4">
             <p class="text-center mt-3 text-6xl h-20 leading-[80px]">$399</p>
             <CallToAction href="/services/"> Ultimate </CallToAction>
-            <p class="text-base mb-4">线下验证报告</p>
+            <p class="text-base mb-4">Offline Verification Report</p>
             <ul class="border-t border-[var(-gray-100)] mt-6 pt-4">
               <div>Plus + Offline Verification.</div>
-              <li class="felx flex-row"><IconCheck class="mr-2" />合作/对话渠道</li>
+              <li class="felx flex-row"><IconCheck class="mr-2" />Risk Alert Report</li>
+              <li class="felx flex-row"><IconCheck class="mr-2" />Offline Verification</li>
             </ul>
-            <div class="mt-4">*Please note that not all registration details may be available.</div>
           </div>
         </div>
       </div>
     </div>
-    <div>
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
       <div>
-        <p class="mt-20 text-3xl text-center font-semibold leading-7">Why Choose Us</p>
-        <div class="mt-10 text-lg leading-8 text-slate-700 dark:text-slate-300">
-          We provide all the tools and insights you need to navigate the complexities of doing business with Chinese companies.
+        <div>
+          <p class="mt-20 text-3xl text-center font-semibold leading-7">Why Choose Us</p>
+          <div class="mt-10 text-lg leading-8 text-slate-700 dark:text-slate-300">
+            We provide all the tools and insights you need to navigate the complexities of doing business with Chinese companies.
+          </div>
         </div>
+        <dl
+          class="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 text-base leading-7 text-slate-700 dark:text-slate-300 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:gap-x-16"
+        >
+          {reasonList.map((reason) => <Reason reason={reason} />)}
+        </dl>
       </div>
-      <dl
-        class="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 text-base leading-7 text-slate-700 dark:text-slate-300 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:gap-x-16"
-      >
-        {reasonList.map((reason) => <Reason reason={reason} />)}
-      </dl>
-    </div>
-    <div class="flex flex-row items-center justify-center gap-12 border-y border-[var(-gray-100)] p-10 text-slate-700 dark:text-slate-300">
-      <div>
-        <img src="/assets/home/report-cover.jpg" alt="Report Cover" class="w-[570px] h-[400px]" />
-      </div>
-      <div class="w-[400px]">
-        <h3 class="text-3xl">Company Verification Reports</h3>
-        <p class="my-4">Ensure the Chinese company you are dealing with is legally registered. <br /> Order online, fast turnaround.</p>
-        <CallToAction href="/services/"> Request a Report </CallToAction>
-      </div>
-    </div>
-    <div class="flex flex-row items-center justify-center gap-12 border-y border-[var(-gray-100)] p-10 text-slate-700 dark:text-slate-300">
-      <div>
-        <img src="/assets/home/promise.jpg" alt="Promise" class="w-[570px] h-[400px]" />
-      </div>
-      <div class="w-[400px]">
-        <h3 class="text-3xl">Global Reach, Local Touch</h3>
-        <p class="my-4">Utilize our local expertise to smoothly fulfill your ideas and requests.</p>
-        <CallToAction href="/services/"> Request a Report </CallToAction>
+      <!-- TODO: 报告示例 -->
+      <!-- <div class="flex flex-row items-center justify-center gap-12 border-y border-[var(-gray-100)] p-10 text-slate-700 dark:text-slate-300">
+        <div>
+          <img src="/assets/home/report-cover.jpg" alt="Report Cover" class="w-[570px] h-[400px]" />
+        </div>
+        <div class="w-[400px]">
+          <h3 class="text-3xl">Company Verification Reports</h3>
+          <p class="my-4">Ensure the Chinese company you are dealing with is legally registered. <br /> Order online, fast turnaround.</p>
+          <CallToAction href="/services/"> Request a Report </CallToAction>
+        </div>
+      </div> -->
+      <div class="flex flex-row items-center justify-center gap-12 border-y border-[var(-gray-100)] p-10 text-slate-700 dark:text-slate-300">
+        <div>
+          <img src="/assets/home/promise.jpg" alt="Promise" class="w-[570px] h-[400px]" />
+        </div>
+        <div class="w-[400px]">
+          <h3 class="text-3xl">Global Reach, Local Touch</h3>
+          <p class="my-4">Utilize our local expertise to smoothly fulfill your ideas and requests.</p>
+          <CallToAction href="/services/"> Request a Report </CallToAction>
+        </div>
       </div>
     </div>
   </div>

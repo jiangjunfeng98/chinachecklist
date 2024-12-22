@@ -1,13 +1,10 @@
 ---
-import Icon from './Icon.astro';
-import ThemeToggle from './ThemeToggle.astro';
 import type { iconPaths } from './IconPaths';
 
 /** Main menu items */
 const textLinks: { label: string; href: string }[] = [
   { label: 'Services', href: '/services/' },
-  { label: 'Resources', href: '/resources/' },
-  { label: 'About Us', href: '/work/' },
+  // { label: 'Resources', href: '/resources/' },
   { label: 'About Us', href: '/about/' }
 ];
 
@@ -52,7 +49,7 @@ const iconLinks: { label: string; href: string; icon: keyof typeof iconPaths }[]
     </ul>
   </nav>
   <div class="flex flex-row items-center gap-2">
-    {
+    <!-- {
       iconLinks.map(({ href, icon, label }) => (
         <a href={href} class="social">
           <span class="sr-only">{label}</span>
@@ -63,7 +60,7 @@ const iconLinks: { label: string; href: string; icon: keyof typeof iconPaths }[]
 
     <div>
       <ThemeToggle />
-    </div>
+    </div> -->
   </div>
 </div>
 

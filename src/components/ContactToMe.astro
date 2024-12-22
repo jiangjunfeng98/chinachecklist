@@ -1,20 +1,41 @@
 ---
 // import { actions } from 'astro:actions';
 const { class: className } = Astro.props;
-// const form = document.querySelector('#contact-form');
-// form?.addEventListener('submit', async (event) => {
-//   event.preventDefault();
-//   const formData = new FormData(form);
-//   const { error } = await actions.sendEmail(formData);
-//   if (!error) {
-//     alert('Message sent successfully!');
-//   } else {
-//     alert('Failed to send message.');
-//   }
-// });
 ---
 
-<div class:list={[className, 'p-5', 'bg-blue-400', 'rounded']}>
+<script>
+  const form = document.querySelector('#contact-form');
+  const sendButton = document.getElementById('send-but');
+  const loadingButton = document.getElementById('send-but-loading');
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    sendButton!.style.display = 'none';
+    loadingButton!.style.display = 'block';
+
+    const formData = new FormData(event.currentTarget as HTMLFormElement);
+    const response = await fetch('/api', {
+      method: 'POST',
+      body: formData,
+      headers: {
+        Accept: 'application/json'
+      }
+    });
+    if (response.status === 200) {
+      (document.getElementById('my_modal_1') as HTMLDialogElement)?.showModal();
+    } else {
+      alert('Message failed to send. Please try again later.');
+    }
+
+    sendButton!.style.display = 'block';
+    loadingButton!.style.display = 'none';
+  });
+</script>
+
+<div
+  class:list={[className, 'p-5', 'rounded']}
+  class="rounded-xl bg-white shadow-xl ring-1 ring-slate-900/5 overflow-hidden my-auto xl:mt-18 dark:bg-slate-800"
+>
   <form id="contact-form" class="flex flex-col gap-2">
     <label for="name">Name:</label>
     <input type="text" id="name" name="name" required />
@@ -23,11 +44,50 @@ const { class: className } = Astro.props;
     <input type="email" id="email" name="email" required />
 
     <label for="message">Message:</label>
-    <textarea id="message" name="message" required></textarea>
+    <textarea id="message" name="message" rows="3" required></textarea>
 
-    <div class="mt-2 flex justify-center">
-      <div>添加人机验证</div>
-      <button type="submit">Send</button>
+    <div class="mt-2 flex justify-between items-center">
+      <div
+        id="cf-container"
+        class="cf-turnstile"
+        data-sitekey="0x4AAAAAAA1v26sbohodlygR"
+        data-size="Normal"
+        data-refresh-expired="auto"
+        data-retry="auto"
+      >
+      </div>
+      <button class="btn btn--primary" type="submit" id="send-but">Send</button>
+      <button class="btn btn--primary hidden" disabled id="send-but-loading">
+        <span class="loading loading-spinner"></span>
+        loading
+      </button>
     </div>
   </form>
+  <dialog id="my_modal_1" class="modal">
+    <div class="modal-box">
+      <h3 class="text-lg font-bold">Message sent!</h3>
+      <p class="py-4">
+        Our team has received your message and will be in touch shortly. Please bear with us while we get back to you as soon as we can.
+      </p>
+      <div class="modal-action">
+        <form method="dialog">
+          <button class="btn">Close</button>
+        </form>
+      </div>
+    </div>
+  </dialog>
 </div>
+<style>
+  input,
+  textarea {
+    @apply focus:ring-2 focus:ring-blue-500 focus:outline-none appearance-none w-full text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md p-2 ring-1 ring-slate-200 shadow-sm;
+  }
+
+  .btn {
+    @apply w-52 text-base font-medium rounded-lg py-2 px-5;
+  }
+
+  .btn--primary {
+    @apply bg-[#3947d2] text-white;
+  }
+</style>

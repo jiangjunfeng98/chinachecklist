@@ -1,108 +1,82 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-
-import Hero from '../components/Hero.astro';
 ---
 
-<BaseLayout title="About | Jeanine White" description="About Jeanine White Lorem Ipsum">
+<BaseLayout title="About | ChinaSupport" description="About ChinaSupport">
   <div class="stack gap-20">
-    <main class="wrapper about">
-      <Hero title="About" tagline="Thanks for stopping by. Read below to learn more about myself and my background.">
-        <img width="1553" height="873" src="/assets/at-work.jpg" alt="Jeanine White at work with a colleague" />
-      </Hero>
-
-      <section>
-        <h2 class="section-title">Background</h2>
-        <div class="content">
-          <p>
-            Lorem ipsum dolor sit amet, <a href="https://astro.build/">Astro</a>
-            makes people happy. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Proin nibh nisl condimentum id venenatis a condimentum
-            vitae. Dapibus ultrices in iaculis nunc. Arcu odio ut sem nulla pharetra diam sit amet. Diam quis enim lobortis scelerisque fermentum dui faucibus
-            in ornare.
-          </p>
-          <p>
-            Arcu dui vivamus arcu felis bibendum ut tristique et egestas. Eget gravida cum sociis natoque penatibus. Cras fermentum odio eu feugiat
-            pretium nibh. Proin nibh nisl condimentum id venenatis. Porta nibh venenatis cras sed felis eget velit. Id diam vel quam elementum
-            pulvinar etiam non.
-          </p>
-          <p>
-            Ultrices tincidunt arcu non sodales neque sodales ut. Sed enim ut sem viverra aliquet eget sit amet. Lacus luctus accumsan tortor posuere
-            ac ut consequat semper viverra. Viverra accumsan in nisl nisi scelerisque eu ultrices. In massa tempor nec feugiat nisl pretium fusce.
-          </p>
+    <main class="mx-auto max-w-7xl px-6 lg:px-8">
+      <section class="bg-white dark:bg-slate-800 py-16 sm:py-20">
+        <h3>China-Support: Your Gateway to Chinese Markets</h3>
+        <h4>Our Story</h4>
+        <div>
+          China-Support was established with a clear vision: to bridge the gap between global businesses and the vast opportunities within the Chinese
+          market. Our team, based in the heart of China, has been navigating the complexities of Chinese trade for over a decade, providing
+          unparalleled access to high-quality goods and services.
         </div>
-      </section>
-      <section>
-        <h2 class="section-title">Education</h2>
-        <div class="content">
-          <p>Corporis voluptates tenetur laudantium.</p>
+        <h4>Our Team</h4>
+        <div>
+          At China-Support, we pride ourselves on our diverse and dedicated team of professionals with a wealth of experience in international trade,
+          sourcing, and customer service. Our expertise lies in understanding both the Western and Chinese business landscapes, ensuring seamless
+          communication and efficient solutions for our clients.
         </div>
-      </section>
-      <section>
-        <h2 class="section-title">Skills</h2>
-        <div class="content">
-          <p>officia unde omnis</p>
+        <h4>Our Services</h4>
+        <div>
+          We offer a comprehensive suite of services tailored to meet the unique needs of our clients:
+          <ul>
+            <li>
+              <strong>Product Sourcing:</strong> Finding the right products at the best prices.
+            </li>
+            <li>
+              <strong>Customization:</strong> Personalizing products to fit your brand's identity.
+            </li>
+            <li>
+              <strong>Procurement:</strong> Streamlining the purchasing process.
+            </li>
+            <li>
+              <strong>Market Research:</strong> Delivering insights into market trends and consumer behavior.
+            </li>
+            <li>
+              <strong>Company Auditing:</strong> Providing neutral and detailed reports on Chinese companies.
+            </li>
+          </ul>
+        </div>
+        <h4>Our Philosophy</h4>
+        <div>
+          Our philosophy is rooted in integrity, professionalism, and a commitment to excellence. We believe in building lasting relationships with
+          our clients, based on trust and mutual success. Our goal is not just to meet expectations but to exceed them.
+        </div>
+        <h4>Our Achievements</h4>
+        <div>
+          Since our inception, China-Support has helped hundreds of businesses successfully enter and thrive in the Chinese market. We've achieved
+          this through a combination of deep market knowledge, personalized service, and a relentless pursuit of quality.
+        </div>
+        <h4>Our Partners</h4>
+        <div>
+          We collaborate with a network of reputable partners across various industries, ensuring that our clients have access to the best resources
+          and opportunities. Our partnerships are built on shared values of quality, reliability, and innovation.
+        </div>
+        <h4>Get in Touch</h4>
+        <div>
+          Ready to unlock the potential of the Chinese market? We are just an email or phone call away. Let's discuss how China-Support can help you
+          achieve your business goals.
+        </div>
+        <h4>Contact Information</h4>
+        <div>
+          <ul>
+            <li>Email: contact@china-support.com</li>
+          </ul>
         </div>
       </section>
     </main>
-
-    <!-- <ContactCTA /> -->
   </div>
 </BaseLayout>
 
 <style>
-  .about {
-    display: flex;
-    flex-direction: column;
-    gap: 3.5rem;
+  h4 {
+    @apply mt-8 text-xl font-semibold pb-1;
   }
-
-  img {
-    margin-top: 1.5rem;
-    border-radius: 1.5rem;
-    box-shadow: var(--shadow-md);
-  }
-
-  section {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    color: var(--gray-200);
-  }
-
-  .section-title {
-    grid-column-start: 1;
-    font-size: var(--text-xl);
-    color: var(--gray-0);
-  }
-
-  .content {
-    grid-column: 2 / 4;
-  }
-
-  .content :global(a) {
-    text-decoration: 1px solid underline transparent;
-    text-underline-offset: 0.25em;
-    transition: text-decoration-color var(--theme-transition);
-  }
-
-  .content :global(a:hover),
-  .content :global(a:focus) {
-    text-decoration-color: currentColor;
-  }
-
-  @media (min-width: 50em) {
-    .about {
-      display: grid;
-      grid-template-columns: 1fr 60% 1fr;
-    }
-
-    .about > :global(:first-child) {
-      grid-column-start: 2;
-    }
-
-    section {
-      display: contents;
-      font-size: var(--text-lg);
-    }
+  li {
+    @apply ml-4;
+    list-style-type: circle;
   }
 </style>
