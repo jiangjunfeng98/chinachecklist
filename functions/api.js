@@ -5,7 +5,7 @@ const emailKey = env.EMAIL_KEY;
 
 const resend = new Resend(emailKey);
 
-export async function onRequest(context) {
+export async function getApi(context) {
   const { request } = context;
   const referer = request.headers.get('referer');
   const allowedDomains = ['china-support.com', 'http://localhost:4321'];
@@ -57,7 +57,7 @@ async function errorHandling(context) {
   }
 }
 
-export const onRequest = [errorHandling, onRequest];
+export const onRequest = [errorHandling, getApi];
 
 /**
  * 邮件发送
