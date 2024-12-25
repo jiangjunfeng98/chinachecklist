@@ -1,27 +1,28 @@
-import type { APIRoute } from 'astro';
 import { Resend } from 'resend';
 
-const turnstileSecret = import.meta.env.TURNSTILE_SECRETKEY;
-const emailKey = import.meta.env.EMAIL_KEY;
+const turnstileSecret = env.TURNSTILE_SECRETKEY;
+const emailKey = env.EMAIL_KEY;
 
 const resend = new Resend(emailKey);
 
-/**
- * 数据提交接口
- * @param param0 
- * @returns 
- */
-export const POST: APIRoute = async function POST({ request }) {
+export async function onRequest(context) {
+  const { request } = context;
+  const referer = request.headers.get('referer');
+  const allowedDomains = ['china-support.com', 'http://localhost:4321'];
+
+  if (!allowedDomains.some(domain => referer && referer.includes(domain))) {
+    return new Response('Unauthorized', { status: 500 });
+  }
+
   try {
     const form = await request.formData();
-    const name = form.get('name') as string;
-    const email = form.get('email') as string;
-    const comment = form.get('comment') as string;
+    const name = form.get('name');
+    const email = form.get('email');
+    const comment = form.get('comment');
     if (!name || !email || !comment) {
       return new Response('fail', { status: 500 });
     }
     const turnstileResponse = form.get('cf-turnstile-response');
-
     const ip = request.headers.get('CF-Connecting-IP');
 
     if (typeof turnstileResponse === 'string') {
@@ -35,21 +36,28 @@ export const POST: APIRoute = async function POST({ request }) {
       });
       const { success } = await response.json();
       if (success) {
-        // 发送信息到邮箱，
-        // 给用户发送邮件提示
-        console.log({ name, email, comment, success });
-        const result = await sendEmail(name, email, comment)
+        const result = await sendEmail(name, email, comment);
         if (result) {
           return new Response('ok', { status: 200 });
         }
       }
     }
     return new Response('turnstile fail', { status: 500 });
-  } catch (error: unknown) {
-    console.error(`Error in comment form submission: ${error as string}`);
+  } catch (error) {
+    console.error(`Error in comment form submission: ${error}`);
     return new Response('error', { status: 500 });
   }
-};
+}
+
+async function errorHandling(context) {
+  try {
+    return await context.next();
+  } catch (err) {
+    return new Response(`${err.message}\n${err.stack}`, { status: 500 });
+  }
+}
+
+export const onRequest = [errorHandling, onRequest];
 
 /**
  * 邮件发送
@@ -58,7 +66,7 @@ export const POST: APIRoute = async function POST({ request }) {
  * @param comment 
  * @returns 
  */
-const sendEmail = async (name: string, email: string, comment: string) => {
+const sendEmail = async (name, email, comment) => {
   const htmlContent = `
     <p>Dear ${name},</p>
     <p>Thank you for reaching out to China-Support with your inquiry. We are delighted that you have chosen us as your trade partner and have received your message.</p>
@@ -96,7 +104,7 @@ const sendEmail = async (name: string, email: string, comment: string) => {
       console.error(`Attempt ${attempts} failed: ${error}`);
       if (attempts >= maxAttempts) {
         console.error('Failed to send email after 3 attempts');
-        return false
+        return false;
       }
     }
   }

@@ -1,1 +1,1 @@
-compatibility_flags = [ "node:util","node:events","node:path","node:stream","node:os" ]
+compatibility_flags = [ "nodejs_compat" ]
