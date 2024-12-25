@@ -1,7 +1,7 @@
 import { Resend } from 'resend';
 
-const turnstileSecret = env.TURNSTILE_SECRETKEY;
-const emailKey = env.EMAIL_KEY;
+const turnstileSecret = context.env.TURNSTILE_SECRETKEY;
+const emailKey = context.env.EMAIL_KEY;
 
 const resend = new Resend(emailKey);
 
@@ -57,7 +57,7 @@ async function errorHandling(context) {
   }
 }
 
-export const onRequest = [errorHandling, getApi];
+export const onRequestPost = [errorHandling, getApi];
 
 /**
  * 邮件发送
