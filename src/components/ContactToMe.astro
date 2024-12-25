@@ -30,6 +30,9 @@ const { class: className } = Astro.props;
     sendButton!.style.display = 'block';
     loadingButton!.style.display = 'none';
   });
+  sendButton?.addEventListener('click', () => {
+    (form as HTMLFormElement).requestSubmit();
+  });
 </script>
 
 <div
@@ -56,7 +59,7 @@ const { class: className } = Astro.props;
         data-retry="auto"
       >
       </div>
-      <button class="btn btn--primary" type="submit" id="send-but">Send</button>
+      <button class="btn btn--primary" type="button" id="send-but">Send</button>
       <button class="btn btn--primary hidden" disabled id="send-but-loading">
         <span class="loading loading-spinner"></span>
         loading
