@@ -1,11 +1,10 @@
 import { Resend } from 'resend';
 
-const turnstileSecret = context.env.TURNSTILE_SECRETKEY;
-const emailKey = context.env.EMAIL_KEY;
-
-const resend = new Resend(emailKey);
-
 export async function getApi(context) {
+  const turnstileSecret = context.env.TURNSTILE_SECRETKEY;
+  const emailKey = context.env.EMAIL_KEY;
+
+
   const { request } = context;
   const referer = request.headers.get('referer');
   const allowedDomains = ['china-support.com', 'http://localhost:4321'];
@@ -36,7 +35,7 @@ export async function getApi(context) {
       });
       const { success } = await response.json();
       if (success) {
-        const result = await sendEmail(name, email, comment);
+        const result = await sendEmail(emailKey, name, email, comment);
         if (result) {
           return new Response('ok', { status: 200 });
         }
@@ -66,7 +65,7 @@ export const onRequestPost = [errorHandling, getApi];
  * @param comment 
  * @returns 
  */
-const sendEmail = async (name, email, comment) => {
+const sendEmail = async (emailKey, name, email, comment) => {
   const htmlContent = `
     <p>Dear ${name},</p>
     <p>Thank you for reaching out to China-Support with your inquiry. We are delighted that you have chosen us as your trade partner and have received your message.</p>
@@ -85,7 +84,7 @@ const sendEmail = async (name, email, comment) => {
 
   let attempts = 0;
   const maxAttempts = 3;
-
+  const resend = new Resend(emailKey);
   while (attempts < maxAttempts) {
     try {
       const { data, error } = await resend.emails.send({
