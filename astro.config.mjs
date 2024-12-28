@@ -3,9 +3,12 @@ import tailwind from "@astrojs/tailwind";
 
 import cloudflare from "@astrojs/cloudflare";
 
+import vercel from "@astrojs/vercel";
+
 // https://astro.build/config
 export default defineConfig({
+  output: 'server',
   integrations: [tailwind()],
-  // output: 'server',
-  // adapter: cloudflare()
+  // adapter: vercel()
+  adapter: cloudflare()
 });

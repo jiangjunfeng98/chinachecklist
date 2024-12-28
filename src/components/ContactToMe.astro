@@ -16,10 +16,7 @@ const { class: className } = Astro.props;
     const formData = new FormData(event.currentTarget as HTMLFormElement);
     const response = await fetch('/api', {
       method: 'POST',
-      body: formData,
-      headers: {
-        Accept: 'application/json'
-      }
+      body: formData
     });
     if (response.status === 200) {
       (document.getElementById('my_modal_1') as HTMLDialogElement)?.showModal();
@@ -29,9 +26,6 @@ const { class: className } = Astro.props;
 
     sendButton!.style.display = 'block';
     loadingButton!.style.display = 'none';
-  });
-  sendButton?.addEventListener('click', () => {
-    (form as HTMLFormElement).requestSubmit();
   });
 </script>
 
@@ -59,7 +53,7 @@ const { class: className } = Astro.props;
         data-retry="auto"
       >
       </div>
-      <button class="btn btn--primary" type="button" id="send-but">Send</button>
+      <button class="btn btn--primary" type="submit" id="send-but">Send</button>
       <button class="btn btn--primary hidden" disabled id="send-but-loading">
         <span class="loading loading-spinner"></span>
         loading
