@@ -44,10 +44,10 @@ export const POST: APIRoute = async function POST({ request }) {
         }
       }
     }
-    return new Response('turnstile fail', { status: 500 });
+    return new Response('turnstile fail', { status: 520 });
   } catch (error: unknown) {
     console.error(`Error in comment form submission: ${error as string}`);
-    return new Response('error', { status: 500 });
+    return new Response('error', { status: 520 });
   }
 };
 
