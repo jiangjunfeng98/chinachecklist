@@ -1,10 +1,6 @@
 import type { APIRoute } from 'astro';
 import { Resend } from 'resend';
 
-const turnstileSecret = import.meta.env.TURNSTILE_SECRETKEY;
-const emailKey = import.meta.env.EMAIL_KEY;
-
-const resend = new Resend(emailKey);
 
 /**
  * 数据提交接口
@@ -13,12 +9,13 @@ const resend = new Resend(emailKey);
  */
 export const POST: APIRoute = async function POST({ request }) {
   try {
+    const turnstileSecret = import.meta.env.TURNSTILE_SECRETKEY;
     const form = await request.formData();
     const name = form.get('name') as string;
     const email = form.get('email') as string;
     const comment = form.get('message') as string;
     if (!name || !email || !comment) {
-      return new Response('fail', { status: 500 });
+      return new Response('fail', { status: 520 });
     }
     const turnstileResponse = form.get('cf-turnstile-response');
 
@@ -59,6 +56,9 @@ export const POST: APIRoute = async function POST({ request }) {
  * @returns 
  */
 const sendEmail = async (name: string, email: string, comment: string) => {
+  const emailKey = import.meta.env.EMAIL_KEY;
+  const resend = new Resend(emailKey);
+
   const htmlContent = `
     <p>Dear ${name},</p>
     <p>Thank you for reaching out to China-Support with your inquiry. We are delighted that you have chosen us as your trade partner and have received your message.</p>
