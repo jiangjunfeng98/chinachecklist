@@ -1,1 +1,4 @@
 compatibility_flags = ["nodejs_compat"]
+[[routes]]
+pattern = "/api"
+method = "POST"
