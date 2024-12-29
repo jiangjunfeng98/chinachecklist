@@ -14,7 +14,6 @@ const resend = new Resend(emailKey);
 export const POST: APIRoute = async function POST({ request }) {
   try {
     const form = await request.formData();
-    console.log(form);
     const name = form.get('name') as string;
     const email = form.get('email') as string;
     const comment = form.get('message') as string;
