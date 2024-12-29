@@ -14,7 +14,7 @@ const { class: className } = Astro.props;
     loadingButton!.style.display = 'block';
 
     const formData = new FormData(event.currentTarget as HTMLFormElement);
-    const response = await fetch('/api/api-submit', {
+    const response = await fetch('/api/api-post', {
       method: 'POST',
       body: formData
     });
