@@ -1,10 +1,8 @@
 # build output
 dist/
+
 # generated types
 .astro/
-.netlify/
-.wrangler/
-.vercel/
 
 # dependencies
 node_modules/
@@ -15,7 +13,6 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-
 # environment variables
 .env
 .env.production
@@ -25,3 +22,7 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# wrangler files
+.wrangler
+.dev.vars
